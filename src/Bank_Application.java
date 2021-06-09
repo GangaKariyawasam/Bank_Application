@@ -103,6 +103,91 @@ public class Bank_Application {
 
     }
 
+    private static void showmenu(){
+
+        char option = '\0';
+
+        System.out.println("A : Create new Account");
+        System.out.println("B : Log as a another User");
+        System.out.println("C : Check your balance");
+        System.out.println("D : Deposit");
+        System.out.println("E : Withdraw");
+        System.out.println("F : previous transaction");
+        System.out.println("G : Log out");
+        System.out.println("H : Exit the System");
+
+        do {
+            System.out.println("...............................");
+            System.out.println("Enter Your Option");
+            System.out.println("...............................");
+            option = scanner.next().charAt(0);
+            System.out.println();
+
+            switch (option){
+
+                case 'A':
+                    System.out.println("...............................");
+                    createNewAccount();
+                    break;
+
+                case 'B':
+                    System.out.println("...............................");
+                    login();
+                    break;
+
+                case 'C':
+                    System.out.println("...............................");
+                    System.out.println("Balance = "+loggedUser.balance);
+                    System.out.println("...............................");
+                    System.out.println();
+                    break;
+
+                case 'D':
+                    System.out.println("...............................");
+                    System.out.println("Enter an amount to deposit");
+                    System.out.println("...............................");
+
+                    int amount = scanner.nextInt();
+                    loggedUser.deposit(amount);
+                    System.out.println();
+                    break;
+
+                case 'E':
+                    System.out.println("...............................");
+                    System.out.println("Enter an amount to withdraw");
+                    System.out.println("...............................");
+
+                    int amount1 = scanner.nextInt();
+                    loggedUser.withdrawal(amount1);
+                    System.out.println();
+                    break;
+
+                case 'F':
+                    System.out.println("...............................");
+                    loggedUser.getPreviousTransaction();
+                    System.out.println("...............................");
+                    break;
+
+                case 'G':
+                    System.out.println("...............................");
+                    loggedUser = null;
+                    System.out.println("Logged Out!");
+                    login();
+                    break;
+
+                case 'H':
+                    System.out.println("................................");
+                    break;
+
+                default:
+                    System.out.println("Invalid option! Please enter correct option");
+                    break;
+            }
+        }while (option != 'H');
+        System.out.println("Thank you for using our services");
+        System.exit(0);
+    }
+
     static class BankAccount{
         int balance;
         int previousTransaction;

@@ -9,6 +9,64 @@ public class Bank_Application {
 
     public static void main(String[] args) {
 
+        System.out.println("Welcome to Ganga's Bank");
+        System.out.println();
+        System.out.println("A : Create new bank account");
+        System.out.println("B : Login to your account");
+
+        final char c = scanner.next().charAt(0);
+        if(c == 'A'){
+            createNewAccount();
+        }else {
+            login();
+        }
+
+    }
+    private static void login(){
+        System.out.println("Login to Your Bank Account");
+        System.out.println("----------------------------------");
+        System.out.println();
+        boolean isLogged = false;
+        do {
+            System.out.print("Please enter your id: ");
+            String id = scanner.next();
+            System.out.print("Please enter your password: ");
+            String pwd = scanner.next();
+            if(id != null && !id.isEmpty()){
+                if(bankAccounts.size()<1){
+                    System.out.println("No Account found! Please create a new Account");
+                    createNewAccount();
+                }
+                for (BankAccount bankAccount : bankAccounts) {
+                    if(bankAccount.customerId.equals(id)){
+                        if(pwd.equals(bankAccount.password)){
+                            loggedUser = bankAccount;
+                            isLogged = true;
+                        }
+                    }
+                    else {
+                        System.out.println("Sorry! No User found");
+                        System.out.println();
+                        System.out.println("A : Create new bank account");
+                        System.out.println("B : Login to Another account");
+
+                        final char c = scanner.next().charAt(0);
+                        if(c == 'A'){
+                            createNewAccount();
+                        }else {
+                            login();
+                        }
+                    }
+                }
+            }
+        }while (!isLogged);
+
+        System.out.println("Welcome"+ " "+loggedUser.customerName);
+        System.out.println("Your ID: "+""+loggedUser.customerId);
+        System.out.println();
+
+        showmenu();
+
     }
 
     static class BankAccount{

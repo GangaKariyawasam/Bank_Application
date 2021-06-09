@@ -22,6 +22,40 @@ public class Bank_Application {
         }
 
     }
+
+    private static void createNewAccount(){
+
+        System.out.println("Please follow the steps below to create your account");
+        System.out.println("------------------------------------");
+        System.out.println();
+        System.out.print("Enter your Name: ");
+        final String name = scanner.next();
+        System.out.print("Enter your Id: ");
+        final String id = scanner.next();
+        String pwd = null;
+        String confirmPwd = null;
+        do {
+            System.out.print("Enter your password: ");
+            pwd = scanner.next();
+            System.out.print("Retype your password: ");
+            confirmPwd = scanner.next();
+
+            if(!pwd.equals(confirmPwd)){
+                System.out.println("Password mismatched! Failed to create a account");
+                System.out.println("-------------------------------------");
+                System.out.println();
+            }
+        }while (!pwd.equals(confirmPwd));
+
+        BankAccount bankAccount = new BankAccount(name,id,pwd);
+        bankAccounts.add(bankAccount);
+
+        System.out.println("Successfully Created the bank account");
+        System.out.println("-----------------------------------");
+        System.out.println();
+        login();
+    }
+
     private static void login(){
         System.out.println("Login to Your Bank Account");
         System.out.println("----------------------------------");
